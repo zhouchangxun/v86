@@ -65,15 +65,17 @@ There are two ways to load images (`bios`, `vga_bios`, `cdrom`, `hda`, ...):
   size_in_bytes` can be added to the object, so that sectors of the image
   are loaded on demand instead of being loaded before boot (slower, but
   strongly recommended for big files). In that case, the `Range: bytes=...`
-  header must be supported on the server.
+  header must be supported on the server. Note: the python SimpleHTTPServer 
+  does not support this, so it won't work with the default webserver used
+  by `make run`.
 
   ```javascript
   // download file before boot
-  options.bios = { 
+  bios: { 
       url: "bios/seabios.bin" 
   }
   // download file sectors as requested, size is required
-  options.hda = { 
+  hda: { 
       url: "disk/linux.iso",
       async: true,
       size: 16 * 1024 * 1024 
@@ -84,11 +86,11 @@ There are two ways to load images (`bios`, `vga_bios`, `cdrom`, `hda`, ...):
 
   ```javascript
   // use <input type=file>
-  options.bios = { 
+  bios: { 
       buffer: document.all.hd_image.files[0]
   }
   // start with empty hard drive
-  options.hda = { 
+  hda: { 
       buffer: new ArrayBuffer(16 * 1024 * 1024)
   }
   ```

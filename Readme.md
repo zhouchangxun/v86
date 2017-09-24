@@ -85,7 +85,7 @@ A testsuite is available in `tests/full/`. Run it using `node tests/full/run.js`
 How to build, run and embed?
 -
 
-- Building is only necessay for releases, open debug.html and everything should load out of the box
+- Building is only necessary for releases, open debug.html and everything should load out of the box
 - If you want a compressed and fast (i.e. with debug code removed) version, you
   need Closure Compiler. Download it as shown below and run `make build/v86_all.js`.
 - ROM and disk images are loaded via XHR, so if you want to try out `index.html`
@@ -108,7 +108,7 @@ wget -P images/ https://copy.sh/v86/images/{linux.iso,linux3.iso,kolibri.img,win
 
 # grab closure compiler
 wget -P closure-compiler https://dl.google.com/closure-compiler/compiler-latest.zip
-unzip -d closure-compiler closure-compiler/compiler-latest.zip compiler.jar
+unzip -d closure-compiler closure-compiler/compiler-latest.zip *.jar
 
 # build the library
 make build/libv86.js
@@ -128,14 +128,15 @@ Here's an overview of the operating systems supported in v86:
   - Tinycore (3.0 kernel): `udev` and `X` fail, but you get a
     terminal.
   - Nanolinux works.
-  - Archlinux works. Add `atkbd` to `MODULES` in `/etc/mkinitcpio.conf`.
-- FreeDOS and Windows 1.01 run very well.
+  - Archlinux works with some caveats. See [archlinux.md](docs/archlinux.md).
+- ReactOS works
+- FreeDOS, Windows 1.01 and MS-DOS run very well.
 - KolibriOS works. A few applications need SSE.
 - Haiku boots, but takes very long (around 30 minutes).
-- ReactOS doesn't work.
 - No Android version seems to work, you still get a shell.
-- Windows 1, 95 and 98 work. Other versions current don't.
+- Windows 1, 95 and 98 work. Other versions currently don't.
 - Many hobby operating systems work.
+- FreeBSD works
 
 You can get some infos on the disk images here: https://github.com/copy/images.
 
@@ -158,6 +159,7 @@ Credits
 -
 
 - CPU test cases via QEMU, http://wiki.qemu.org/Main_Page
+- More tests via [kvm-unit-tests](https://www.linux-kvm.org/page/KVM-unit-tests)
 - [Disk Images](https://github.com/copy/images)
 - [The jor1k project](https://github.com/s-macke/jor1k) for 9p, filesystem and uart drivers
 - [WinWorld](https://winworldpc.com/) sources of some old operating systems
